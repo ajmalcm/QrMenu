@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 //"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV__-3abmbiyCo3JjXlzLESUd_jmvbgQ62Rw&s"
+// https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG05O5NcCE_kSlfxvXQm7tppLU1n4xF3ryyA&s
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        
       </body>
     </html>
   );

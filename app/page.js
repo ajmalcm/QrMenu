@@ -10,7 +10,9 @@ import {
   Info,
   ChevronUp,
   ChevronDown,
+  Utensils,
 } from "lucide-react";
+import Header from "@/components/Header";
 
 const menuItems = [
   {
@@ -224,9 +226,7 @@ export default function MenuPage() {
         }}
       />
 
-      <h1 className="text-4xl font-semibold mb-8 text-center tracking-tight">
-        Today's Menu
-      </h1>
+      <Header/>
 
       {/* Filters + Search + Sort */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 max-w-7xl mx-auto">

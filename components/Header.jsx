@@ -33,7 +33,7 @@ const Header = () => {
       className="sticky top-0 z-20  border-b  py-3 px-4 sm:px-10 mb-6  flex items-center justify-between border-gray-200 bg-white/75 backdrop-blur-md shadow-sm"
     >
       <span className="text-xs sm:text-sm font-semibold text-gray-700 flex items-center gap-1">
-        NAHDI MANDI
+        KFK
       </span>
       <h1 className="flex items-center gap-2 text-lg sm:text-xl font-semibold text-gray-800 tracking-tight">
         <Utensils className="w-5 h-5" />

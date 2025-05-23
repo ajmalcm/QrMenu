@@ -11,20 +11,28 @@ import {
 import Header from "@/components/Header";
 import Items from "@/components/Items";
 import SearchSort from "@/components/SearchSort";
-import { menuItems } from "@/utils/sampleData";
+import { MENU } from "@/utils/sampleData";
 
-
-
+const menuItems = MENU.map((item, index) => {
+  return {
+    id: index + 1,
+    name: item.item,
+    price: item.price[0],
+    priceDisplay: `₹${item.price[0]}`,
+    category: item.category,
+    inStock: item.inStock,
+    description: `Available sizes: ${item.price.map((p) => `₹${p}`).join(", ")}`,
+  };
+});
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [myItems, setMyItems] = useState([]);
-  const [searchInput, setSearchInput] = useState(""); // raw input
-  const [searchTerm, setSearchTerm] = useState("");   // debounced value
-
+  const [searchInput, setSearchInput] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [sortAsc, setSortAsc] = useState(true);
+  // const [inStockOnly, setInStockOnly] = useState(false);
 
-  // Filter items by category & search
   const filteredItems = useMemo(() => {
     let items =
       selectedCategory === "All"
@@ -43,7 +51,10 @@ export default function MenuPage() {
       );
     }
 
-    // Sort by price
+    // if (inStockOnly) {
+    //   items = items.filter((item) => item.inStock);
+    // }
+
     items = items.slice().sort((a, b) =>
       sortAsc ? a.price - b.price : b.price - a.price
     );
@@ -106,12 +117,11 @@ export default function MenuPage() {
   };
 
   useEffect(() => {
-  const handler = setTimeout(() => {
-    setSearchTerm(searchInput.trim());
-  }, 300); // 300ms debounce
-
-  return () => clearTimeout(handler); // cancel previous timer
-}, [searchInput]);
+    const handler = setTimeout(() => {
+      setSearchTerm(searchInput.trim());
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [searchInput]);
 
   return (
     <motion.div
@@ -119,7 +129,6 @@ export default function MenuPage() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 15 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
-      
       className="min-h-screen bg-white p-4 sm:p-10 font-sans text-gray-900"
     >
       <Toaster
@@ -132,13 +141,28 @@ export default function MenuPage() {
         }}
       />
 
-      <Header/>
+      <Header />
 
-      {/* Filters + Search + Sort */}
-      <SearchSort myItems={myItems} setSearchInput={setSearchInput} setSelectedCategory={setSelectedCategory} setSortAsc={setSortAsc} sortAsc={sortAsc} selectedCategory={selectedCategory} searchInput={searchInput}/>
+      <SearchSort
+        myItems={myItems}
+        setSearchInput={setSearchInput}
+        setSelectedCategory={setSelectedCategory}
+        setSortAsc={setSortAsc}
+        sortAsc={sortAsc}
+        selectedCategory={selectedCategory}
+        searchInput={searchInput}
+        menuItems={menuItems}
+        // inStockOnly={inStockOnly}
+        // setInStockOnly={setInStockOnly}
+      />
 
-      {/* Items Grid */}
-     <Items selectedCategory={selectedCategory} addItem={addItem} removeItem={removeItem} filteredItems={filteredItems} myItems={myItems}/>
+      <Items
+        selectedCategory={selectedCategory}
+        addItem={addItem}
+        removeItem={removeItem}
+        filteredItems={filteredItems}
+        myItems={myItems}
+      />
     </motion.div>
   );
 }

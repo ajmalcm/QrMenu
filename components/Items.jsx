@@ -22,18 +22,18 @@ const Items = ({selectedCategory,addItem,removeItem,filteredItems,myItems}) => {
                   boxShadow: "0 10px 20px rgba(0,0,0,0.12)",
                 }}
                 transition={{ type: "spring", stiffness: 110, damping: 20 }}
-                className="relative bg-white rounded-3xl shadow-md overflow-hidden cursor-pointer"
+                className="relative bg-gray-100 rounded-3xl shadow-md overflow-hidden cursor-pointer"
               >
                 {!item.inStock && (
-                  <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full z-10 select-none">
+                  <span className="absolute top-3 right-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full z-10 select-none">
                     Out of Stock
                   </span>
                 )}
-                <img
+                {/* <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG05O5NcCE_kSlfxvXQm7tppLU1n4xF3ryyA&s"
                   alt={item.name}
                   className="w-full h-44 object-cover rounded-t-3xl"
-                />
+                /> */}
                 <div className="p-5">
                   <h3 className="text-xl font-semibold mb-1">{item.name}</h3>
                   <p className="text-gray-600 text-sm mb-3">
